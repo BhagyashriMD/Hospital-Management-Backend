@@ -19,7 +19,7 @@ import com.Hospital_Management_System.model.Patient;
 import com.Hospital_Management_System.repo.PatientRepo;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-//class is handlingrest api handle
+//class is handling rest api handle
 @RequestMapping("/api/v1")
 public class PatientController {
 		

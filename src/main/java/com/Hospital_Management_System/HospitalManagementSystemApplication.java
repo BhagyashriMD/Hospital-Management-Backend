@@ -19,18 +19,7 @@ public class HospitalManagementSystemApplication {
 		SpringApplication.run(HospitalManagementSystemApplication.class, args);
 	}
 
-//	@Bean
-//	public WebMvcConfigurer corsConfigurer()
-//	{
-//		return new WebMvcConfigurer()
-//				{
-//			public void addCorsMapping(CorsRegistry registry)
-//			{
-//				registry.addMapping("/**").allowedOrigins("http://localhost:4200");
-//			}
-//			
-//				};
-//	}
+
 	 @Bean
 	    public CorsConfigurationSource corsConfigurationSource() {
 	        CorsConfiguration configuration = new CorsConfiguration();
@@ -39,7 +28,7 @@ public class HospitalManagementSystemApplication {
 	        configuration.addAllowedHeader("*");
 	        configuration.setAllowCredentials(true);
 	        UrlBasedCorsConfigurationSource source = new
-	                UrlBasedCorsConfigurationSource();
+	        UrlBasedCorsConfigurationSource();
 	        source.registerCorsConfiguration("/**", configuration);
 	        return source;
 	    }

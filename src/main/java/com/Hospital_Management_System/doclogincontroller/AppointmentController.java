@@ -41,17 +41,7 @@ public class AppointmentController {
 		System.out.println("Appointment data"+ appointmentRepo.findAll());
 		return appointmentRepo.findAll();
 	}
-	//@DeleteMapping("/appointment/{id}")
-//	public ResponseEntity<Map<String,Boolean>>deleteAppointment(@PathVariable long id) throws AttributeNotFoundException
-//	{
-//		 Appointments appointment=appointmentRepo.findById(id).orElseThrow(()->new AttributeNotFoundException("Appointment not found with id"+id));
-//		Map<String,Boolean>response=new HashMap<String,Boolean>();
-//		
-//		 response.put("Deleted", Boolean.TRUE);
-//		 return ResponseEntity.ok(response);
-//		
-//	}
-//	
+
 	
 	@DeleteMapping("appointment/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
