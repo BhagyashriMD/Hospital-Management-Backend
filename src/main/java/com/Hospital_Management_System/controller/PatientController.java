@@ -29,13 +29,7 @@ public class PatientController {
 		super();
 		this.patientRepo = patientRepo;
 	}
-	@GetMapping("/test")
-	public String test()
 	
-	{
-		return "hello";
-		
-	}
 	@PostMapping("/patient")
 	public Patient createPatient(@RequestBody Patient patient)
 	{
@@ -47,6 +41,15 @@ public class PatientController {
 		System.out.println("Reading get data");
 		return patientRepo.findAll();
 	}
+	
+	@GetMapping("/patient/{id}")
+	public Optional<Patient> getPatientById(@PathVariable("id") Long id)
+	{
+		//System.out.println("Reading get data");
+		Optional<Patient> patient=patientRepo.findById(id);
+		return patient;
+	}
+	
 	@DeleteMapping("patient/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
         Optional<Patient> patient = this.patientRepo.findById(id);
@@ -56,11 +59,21 @@ public class PatientController {
         }
         return ResponseEntity.notFound().build();
     }
-//	@PutMapping("patient")
-//	public ResponseEntity<Patient>Update(long id)
-//	{
-//		
-//	}
-//	
+	@PutMapping("patient/{id}")
+	public ResponseEntity<Patient> updatePatientById(@PathVariable long id,@RequestBody Patient patient)
+	
+	{
+	    Patient upatient = patientRepo.findById(id).orElseThrow(() -> new RuntimeException("Entity not found with id: " + id));
+	   //Patient updatedPatient = patient.get();
+	    upatient.setName( patient.getName());
+	    upatient.setBlood(patient.getBlood());
+	    upatient.setAge(patient.getAge());
+	    upatient.setUrgency(patient.getUrgency());
+	    upatient.setFees(patient.getFees());
+	    Patient savePatient=patientRepo.save(upatient);
+	    return ResponseEntity.ok(savePatient);
+	  }
+	
+	
 
 }
