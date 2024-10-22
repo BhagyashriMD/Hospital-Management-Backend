@@ -1,7 +1,5 @@
 package com.Hospital_Management_System;
 
-import java.util.Arrays;
-
 import org.apache.catalina.filters.CorsFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,18 +18,18 @@ public class HospitalManagementSystemApplication {
 	}
 
 
-	 @Bean
-	    public CorsConfigurationSource corsConfigurationSource() {
-	        CorsConfiguration configuration = new CorsConfiguration();
-	        configuration.addAllowedOrigin("http://localhost:4200");
-	        configuration.addAllowedMethod("*");
-	        configuration.addAllowedHeader("*");
-	        configuration.setAllowCredentials(true);
-	        UrlBasedCorsConfigurationSource source = new
-	        UrlBasedCorsConfigurationSource();
-	        source.registerCorsConfiguration("/**", configuration);
-	        return source;
-	    }
+//	 @Bean
+//	    public CorsConfigurationSource corsConfigurationSource() {
+//	        CorsConfiguration configuration = new CorsConfiguration();
+//	        configuration.addAllowedOrigin("http://localhost:4200");
+//	        configuration.addAllowedMethod("*");
+//	        configuration.addAllowedHeader("*");
+//	        configuration.setAllowCredentials(true);
+//	        UrlBasedCorsConfigurationSource source = new
+//	        UrlBasedCorsConfigurationSource();
+//	        source.registerCorsConfiguration("/**", configuration);
+//	        return source;
+//	    }
 	 
 
 }

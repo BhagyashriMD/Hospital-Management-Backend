@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Hospital_Management_System.doclogin.entity.Appointments;
 import com.Hospital_Management_System.model.Patient;
 import com.Hospital_Management_System.repo.PatientRepo;
+
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 //class is handling rest api handle
@@ -30,26 +34,62 @@ public class PatientController {
 		this.patientRepo = patientRepo;
 	}
 	
+	@Operation(summary="Save single Patient",description="Save single Patient")
+	//describe the operation
+	
 	@PostMapping("/patient")
 	public Patient createPatient(@RequestBody Patient patient)
 	{
 		return patientRepo.save(patient);
 	}
+	
+	
+	@Operation(summary="Get all the Patients",description="Return all user",responses=
+		{
+	@ApiResponse(
+			responseCode="200",
+			description="Success"
+		),
+	
+	@ApiResponse(
+			responseCode="500",
+			description="Internal Error"
+		),
+			
+			
+	}
+	)
 	@GetMapping("/patient")
-	public List<Patient>getAllPatient()
+	public ResponseEntity<List<Patient>>getAllPatient()
 	{
 		System.out.println("Reading get data");
-		return patientRepo.findAll();
+		//return patientRepo.findAll();
+		return ResponseEntity.ok(patientRepo.findAll());
+		
+		
 	}
 	
+	
+	@Operation(summary="Get single Patient",description="Return single user")
+	//describe the operation
+	@ApiResponses(value= {
+			
+			@ApiResponse(responseCode="200",description="User found"),
+			@ApiResponse(responseCode="404",description="User not found")
+	}
+	)
 	@GetMapping("/patient/{id}")
 	public Optional<Patient> getPatientById(@PathVariable("id") Long id)
 	{
 		//System.out.println("Reading get data");
 		Optional<Patient> patient=patientRepo.findById(id);
+		
 		return patient;
 	}
 	
+	
+	
+	@Hidden//to hide the opeartion
 	@DeleteMapping("patient/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
         Optional<Patient> patient = this.patientRepo.findById(id);
@@ -59,6 +99,15 @@ public class PatientController {
         }
         return ResponseEntity.notFound().build();
     }
+	
+	@Operation(summary="Update Patient",description="Update Patient")
+	//describe the operation
+	@ApiResponses(value= {
+			
+			@ApiResponse(responseCode="200",description="User found"),
+			@ApiResponse(responseCode="404",description="User not found")
+	}
+	)
 	@PutMapping("patient/{id}")
 	public ResponseEntity<Patient> updatePatientById(@PathVariable long id,@RequestBody Patient patient)
 	
